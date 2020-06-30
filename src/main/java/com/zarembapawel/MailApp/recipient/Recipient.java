@@ -1,4 +1,7 @@
-package com.zarembapawel.MailApp;
+package com.zarembapawel.MailApp.recipient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.zarembapawel.MailApp.message.Message;
 
 import javax.persistence.*;
 
@@ -9,10 +12,12 @@ public class Recipient
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private int id;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "message")
+    @JsonIgnore
     private Message message;
 
     @Column(name = "email")

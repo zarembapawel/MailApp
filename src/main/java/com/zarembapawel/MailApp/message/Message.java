@@ -1,4 +1,6 @@
-package com.zarembapawel.MailApp;
+package com.zarembapawel.MailApp.message;
+
+import com.zarembapawel.MailApp.recipient.Recipient;
 
 import javax.persistence.*;
 import java.util.ArrayList;

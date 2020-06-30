@@ -1,6 +1,5 @@
 package com.zarembapawel.MailApp.message;
 
-import com.zarembapawel.MailApp.Message;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,9 @@ public class MessageRepository implements MessageDAO
     {
         Session s = em.unwrap(Session.class);
 
-        return s.get(Message.class, id);
+        Message message = s.get(Message.class, id);
+
+        return message;
     }
 
     @Override
