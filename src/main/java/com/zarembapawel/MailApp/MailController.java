@@ -5,7 +5,6 @@ import com.zarembapawel.MailApp.message.MessageDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,5 +24,15 @@ public class MailController
     public Message get(@PathVariable int id)
     {
         return repository.get(id);
+    }
+
+    @GetMapping("/status/{id}")
+    public Boolean status(@PathVariable int id)
+    {
+        Message message = repository.get(id);
+
+        if(message == null) return null;
+
+        return message.getSent();
     }
 }
