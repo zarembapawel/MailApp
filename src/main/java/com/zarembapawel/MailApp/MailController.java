@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/mail")
@@ -15,9 +16,9 @@ public class MailController
     private MessageDAO repository;
 
     @GetMapping("/list")
-    public String list()
+    public List<Message> list()
     {
-        return "Test";
+        return repository.getAll();
     }
 
     @GetMapping("/get/{id}")
