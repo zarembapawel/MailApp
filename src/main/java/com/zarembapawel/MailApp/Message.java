@@ -1,6 +1,7 @@
 package com.zarembapawel.MailApp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -102,5 +103,14 @@ public class Message
     public void setSent(Boolean sent)
     {
         this.sent = sent;
+    }
+
+    public void addRecipient(Recipient recipient)
+    {
+        if(recipients == null) recipients = new ArrayList<>();
+
+        recipients.add(recipient);
+
+        recipient.setMessage(this);
     }
 }
