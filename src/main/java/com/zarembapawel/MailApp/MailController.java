@@ -33,13 +33,13 @@ public class MailController
     }
 
     @GetMapping("/status/{id}")
-    public Boolean status(@PathVariable int id)
+    public String status(@PathVariable int id)
     {
         Message message = repository.get(id);
 
         if(message == null) return null;
 
-        return message.getSent();
+        return (message.getSent()) ? "sent" : "pending";
     }
 
     @PutMapping("/sendAll")
