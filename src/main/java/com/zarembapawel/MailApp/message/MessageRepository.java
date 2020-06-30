@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -35,7 +36,8 @@ public class MessageRepository implements MessageDAO
     }
 
     @Override
-    public void add(Message message)
+    @Transactional
+    public void save(Message message)
     {
         Session s = em.unwrap(Session.class);
 
@@ -52,5 +54,15 @@ public class MessageRepository implements MessageDAO
         q.setParameter("id", id);
 
         q.executeUpdate();
+    }
+
+    @Override
+    public List<Message> getUnsent()
+    {
+        Session s = em.unwrap(Session.class);
+
+        Query<Message> messages = s.createQuery("from Message where sent != 1", Message.class);
+
+        return messages.getResultList();
     }
 }

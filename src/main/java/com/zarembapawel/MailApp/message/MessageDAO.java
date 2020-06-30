@@ -8,7 +8,9 @@ public interface MessageDAO
 
     public Message get(int id);
 
-    public void add(Message message);
+    public void save(Message message);
 
     public void delete(int id);
+
+    public List<Message> getUnsent();
 }
