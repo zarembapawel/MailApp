@@ -15,9 +15,11 @@ public class MailController
     private MessageDAO repository;
 
     @PostMapping("/add")
-    public Message add()
+    public Message add(@RequestBody Message message)
     {
-        return null;
+        repository.save(message);
+
+        return message;
     }
 
     @GetMapping("/list")
