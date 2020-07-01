@@ -31,37 +31,35 @@ public class Mailer
 
     public void send(Message message)
     {
-        if(true)
+        MimeMessagePreparator messagePreparator = mimeMessage ->
         {
-            MimeMessagePreparator messagePreparator = mimeMessage ->
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
+            messageHelper.setFrom(message.getSender());
+            messageHelper.setSubject(message.getTopic());
+            messageHelper.setPriority(message.getPriority());
+            String content = mailContentBuilder.build(message.getContent());
+            messageHelper.setText(content, true);
+
+            for(Recipient recipient : message.getRecipients())
             {
-                MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-                messageHelper.setFrom(message.getSender());
-                messageHelper.setSubject(message.getTopic());
-                messageHelper.setPriority(message.getPriority());
-                String content = mailContentBuilder.build(message.getContent());
-                messageHelper.setText(content, true);
-
-                for(Recipient recipient : message.getRecipients())
-                {
-                    messageHelper.setTo(recipient.getEmail());
-                }
-
-                for(Attachment attachment : message.getAttachments())
-                {
-                    messageHelper.addAttachment(attachment.getName(), new File(attachment.getUrl()));
-                }
-            };
-
-            try
-            {
-                javaMailSender.send(messagePreparator);
+                messageHelper.setTo(recipient.getEmail());
             }
 
-            catch (MailException e)
+            for(Attachment attachment : message.getAttachments())
             {
-                System.out.println(e.getMessage());
+                messageHelper.addAttachment(attachment.getName(), new File(attachment.getUrl()));
             }
+        };
+
+        try
+        {
+            System.out.println("Sending: " + message.getTopic());
+            javaMailSender.send(messagePreparator);
+        }
+
+        catch (MailException e)
+        {
+            System.out.println(e.getMessage());
         }
     }
 }

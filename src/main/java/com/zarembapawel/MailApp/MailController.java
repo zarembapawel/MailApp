@@ -1,6 +1,7 @@
 package com.zarembapawel.MailApp;
 
 import com.zarembapawel.MailApp.attachment.Attachment;
+import com.zarembapawel.MailApp.mailer.Mailer;
 import com.zarembapawel.MailApp.message.Message;
 import com.zarembapawel.MailApp.message.MessageDAO;
 import com.zarembapawel.MailApp.recipient.Recipient;
@@ -15,6 +16,9 @@ public class MailController
 {
     @Autowired
     private MessageDAO repository;
+
+    @Autowired
+    private Mailer mailer;
 
     @PostMapping("/add")
     public Message add(@RequestBody Message message)
@@ -65,7 +69,7 @@ public class MailController
 
         for(Message msg : messages)
         {
-            //@TODO send email
+            mailer.send(msg);
 
             msg.setSent(true);
 
