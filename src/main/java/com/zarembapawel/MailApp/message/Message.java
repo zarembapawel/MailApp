@@ -1,5 +1,6 @@
 package com.zarembapawel.MailApp.message;
 
+import com.zarembapawel.MailApp.attachment.Attachment;
 import com.zarembapawel.MailApp.recipient.Recipient;
 
 import javax.persistence.*;
@@ -28,6 +29,13 @@ public class Message
     @OneToMany(mappedBy = "message", cascade = CascadeType.ALL)
     private List<Recipient> recipients;
 
+    @Column(name = "attachments")
+    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL)
+    private List<Attachment> attachments;
+
+    @Column(name = "priority")
+    private int priority;
+
     @Column(name = "sent")
     private Boolean sent;
 
@@ -37,14 +45,16 @@ public class Message
         this.sent = false;
     }
 
-    public Message(String topic, String content, String sender, List<Recipient> recipients)
+    public Message(String topic, String content, String sender, List<Recipient> recipients, List<Attachment> attachments, int priority)
     {
-        super();
+        this();
 
         this.topic = topic;
         this.content = content;
         this.sender = sender;
         this.recipients = recipients;
+        this.attachments = attachments;
+        this.priority = priority;
     }
 
     public int getId()
@@ -97,6 +107,26 @@ public class Message
         this.recipients = recipients;
     }
 
+    public List<Attachment> getAttachments()
+    {
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments)
+    {
+        this.attachments = attachments;
+    }
+
+    public int getPriority()
+    {
+        return priority;
+    }
+
+    public void setPriority(int priority)
+    {
+        this.priority = priority;
+    }
+
     public Boolean getSent()
     {
         return sent;
@@ -114,5 +144,14 @@ public class Message
         recipients.add(recipient);
 
         recipient.setMessage(this);
+    }
+
+    public void addAttachment(Attachment attachment)
+    {
+        if(attachments == null) attachments = new ArrayList<>();
+
+        attachments.add(attachment);
+
+        attachment.setMessage(this);
     }
 }
