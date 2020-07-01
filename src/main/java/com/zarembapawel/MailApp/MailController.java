@@ -1,5 +1,6 @@
 package com.zarembapawel.MailApp;
 
+import com.zarembapawel.MailApp.attachment.Attachment;
 import com.zarembapawel.MailApp.message.Message;
 import com.zarembapawel.MailApp.message.MessageDAO;
 import com.zarembapawel.MailApp.recipient.Recipient;
@@ -21,6 +22,11 @@ public class MailController
         for(Recipient recipient : message.getRecipients())
         {
             recipient.setMessage(message);
+        }
+
+        for(Attachment attachment : message.getAttachments())
+        {
+            attachment.setMessage(message);
         }
 
         repository.save(message);

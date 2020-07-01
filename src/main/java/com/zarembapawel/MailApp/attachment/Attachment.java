@@ -17,6 +17,7 @@ public class Attachment
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "message")
+    @JsonIgnore
     private Message message;
 
     @Column(name = "name")
