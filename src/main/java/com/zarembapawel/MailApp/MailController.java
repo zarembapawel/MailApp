@@ -2,6 +2,7 @@ package com.zarembapawel.MailApp;
 
 import com.zarembapawel.MailApp.message.Message;
 import com.zarembapawel.MailApp.message.MessageDAO;
+import com.zarembapawel.MailApp.recipient.Recipient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,11 @@ public class MailController
     @PostMapping("/add")
     public Message add(@RequestBody Message message)
     {
+        for(Recipient recipient : message.getRecipients())
+        {
+            recipient.setMessage(message);
+        }
+
         repository.save(message);
 
         return message;
