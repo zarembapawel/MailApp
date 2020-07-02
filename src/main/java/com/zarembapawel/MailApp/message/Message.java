@@ -4,7 +4,6 @@ import com.zarembapawel.MailApp.attachment.Attachment;
 import com.zarembapawel.MailApp.recipient.Recipient;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -135,23 +134,5 @@ public class Message
     public void setSent(Boolean sent)
     {
         this.sent = sent;
-    }
-
-    public void addRecipient(Recipient recipient)
-    {
-        if(recipients == null) recipients = new ArrayList<>();
-
-        recipients.add(recipient);
-
-        recipient.setMessage(this);
-    }
-
-    public void addAttachment(Attachment attachment)
-    {
-        if(attachments == null) attachments = new ArrayList<>();
-
-        attachments.add(attachment);
-
-        attachment.setMessage(this);
     }
 }

@@ -23,11 +23,13 @@ public class MailController
     @PostMapping("/add")
     public Message add(@RequestBody Message message)
     {
+        //Assign recipients to message
         for(Recipient recipient : message.getRecipients())
         {
             recipient.setMessage(message);
         }
 
+        //Assign attachments to message
         for(Attachment attachment : message.getAttachments())
         {
             attachment.setMessage(message);
@@ -61,7 +63,7 @@ public class MailController
     }
 
     @PutMapping("/sendAll")
-    public int sendAll()
+    public String sendAll()
     {
         int sendMessages = 0;
 
@@ -69,8 +71,10 @@ public class MailController
 
         for(Message msg : messages)
         {
+            //Sending e-mail
             mailer.send(msg);
 
+            //Updating message sent status
             msg.setSent(true);
 
             repository.save(msg);
@@ -78,6 +82,6 @@ public class MailController
             sendMessages++;
         }
 
-        return sendMessages;
+        return "Send e-mails: " + sendMessages;
     }
 }
