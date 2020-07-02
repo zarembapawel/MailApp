@@ -24,15 +24,21 @@ public class MailController
     public Message add(@RequestBody Message message)
     {
         //Assign recipients to message
-        for(Recipient recipient : message.getRecipients())
+        if(message.getRecipients() != null)
         {
-            recipient.setMessage(message);
+            for (Recipient recipient : message.getRecipients())
+            {
+                recipient.setMessage(message);
+            }
         }
 
         //Assign attachments to message
-        for(Attachment attachment : message.getAttachments())
+        if(message.getAttachments() != null)
         {
-            attachment.setMessage(message);
+            for (Attachment attachment : message.getAttachments())
+            {
+                attachment.setMessage(message);
+            }
         }
 
         repository.save(message);

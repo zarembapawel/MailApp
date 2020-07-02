@@ -16,8 +16,7 @@ Content-Type: application/json
     }
   ],
   "attachments": [],
-  "priority": 5,
-  "sent": false
+  "priority": 5
 }
 
 
@@ -40,8 +39,7 @@ Content-Type: application/json
     }
   ],
   "attachments": [],
-  "priority": 5,
-  "sent": false
+  "priority": 5
 }
 
 
@@ -87,8 +85,7 @@ Content-Type: application/json
       "url": "https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg"
     }
   ],
-  "priority": 1,
-  "sent": false
+  "priority": 1
 }
 
 
@@ -120,8 +117,7 @@ Content-Type: application/json
       "url": "https://cdn.benchmark.pl/thumbs/uploads/backend_img/a/oracle-sun-java-logo.jpg/475x0x1.jpg"
     }
   ],
-  "priority": 1,
-  "sent": false
+  "priority": 1
 }
 
 
